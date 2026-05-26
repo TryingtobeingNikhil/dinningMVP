@@ -84,10 +84,10 @@ export function CartSidebar() {
               }}
             />
             <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 26, stiffness: 300 }}
+              initial={{ x: "100%", filter: "blur(10px)" }}
+              animate={{ x: 0, filter: "blur(0px)" }}
+              exit={{ x: "100%", filter: "blur(10px)" }}
+              transition={{ type: "spring", damping: 28, stiffness: 350 }}
               id="cart-sidebar"
               className="glass-strong"
               style={{
@@ -106,8 +106,9 @@ export function CartSidebar() {
               {/* Header */}
               <div
                 style={{
-                  padding: "20px",
-                  borderBottom: "1px solid var(--border)",
+                  padding: "24px",
+                  borderBottom: "1px solid rgba(255,255,255,0.05)",
+                  background: "rgba(255,255,255,0.02)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
@@ -279,9 +280,9 @@ export function CartSidebar() {
               {cart.length > 0 && (
                 <div
                   style={{
-                    padding: "16px 20px",
-                    borderTop: "1px solid var(--border)",
-                    background: "var(--bg-secondary)",
+                    padding: "24px",
+                    borderTop: "1px solid rgba(255,255,255,0.05)",
+                    background: "rgba(255,255,255,0.02)",
                   }}
                 >
                   <div
@@ -320,17 +321,19 @@ export function CartSidebar() {
                     <span>Total</span>
                     <span className="gradient-text">₹{total}</span>
                   </div>
-                  <button
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     id="place-order-btn"
                     className="btn-glow"
-                    style={{ width: "100%", padding: "14px", fontSize: "1rem" }}
+                    style={{ width: "100%", padding: "16px", fontSize: "1.05rem" }}
                     onClick={() => {
                       toggleCart();
                       setShowOTP(true);
                     }}
                   >
                     Place Order →
-                  </button>
+                  </motion.button>
                 </div>
               )}
             </motion.div>

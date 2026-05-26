@@ -104,7 +104,9 @@ export function OTPModal({ onClose }: { onClose: () => void }) {
         style={{
           position: "fixed",
           inset: 0,
-          background: "rgba(0,0,0,0.7)",
+          background: "rgba(0,0,0,0.6)",
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
           zIndex: 1100,
           display: "flex",
           alignItems: "center",
@@ -113,9 +115,10 @@ export function OTPModal({ onClose }: { onClose: () => void }) {
         }}
       >
         <motion.div
-          initial={{ scale: 0.9, y: 20 }}
-          animate={{ scale: 1, y: 0 }}
-          exit={{ scale: 0.9, y: 20 }}
+          initial={{ scale: 0.95, y: 30, filter: "blur(10px)" }}
+          animate={{ scale: 1, y: 0, filter: "blur(0px)" }}
+          exit={{ scale: 0.95, y: 30, filter: "blur(10px)" }}
+          transition={{ type: "spring", damping: 28, stiffness: 350 }}
           onClick={(e) => e.stopPropagation()}
           className="glass-strong"
           style={{

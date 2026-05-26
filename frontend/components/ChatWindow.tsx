@@ -26,18 +26,19 @@ function SuggestionCard({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
+      whileHover={{ scale: 1.02, y: -2 }}
+      whileTap={{ scale: 0.98 }}
       className="menu-card"
       style={{
         display: "flex",
         gap: "12px",
         padding: "12px",
-        borderRadius: "12px",
+        borderRadius: "14px",
         cursor: "pointer",
-        minWidth: "240px",
-        maxWidth: "280px",
+        minWidth: "260px",
+        maxWidth: "300px",
         flexShrink: 0,
+        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.05), 0 4px 12px rgba(0,0,0,0.2)",
       }}
     >
       {suggestion.image_url && (
@@ -154,17 +155,18 @@ function MessageBubble({ msg }: { msg: ChatMessage }) {
         <div
           style={{
             display: "flex",
-            gap: "10px",
+            gap: "12px",
             overflowX: "auto",
-            paddingBottom: "4px",
+            paddingBottom: "8px",
             width: "100%",
-            paddingRight: "4px",
+            paddingRight: "8px",
+            scrollSnapType: "x mandatory",
           }}
         >
           {msg.suggestions.map((s) => (
-            <SuggestionCard
-              key={s.itemId}
-              suggestion={s}
+            <div key={s.itemId} style={{ scrollSnapAlign: "start" }}>
+              <SuggestionCard
+                suggestion={s}
               onAdd={(sug) => {
                 const store = useDiningStore.getState();
                 if (!store.sessionId) return;
@@ -195,6 +197,7 @@ function MessageBubble({ msg }: { msg: ChatMessage }) {
                 });
               }}
             />
+            </div>
           ))}
         </div>
       )}
@@ -341,25 +344,26 @@ export function ChatWindow() {
       <motion.button
         id="chat-toggle-btn"
         onClick={toggleChat}
-        whileHover={{ scale: 1.05 }}
+        whileHover={{ scale: 1.05, y: -4, boxShadow: "0 12px 40px rgba(249,115,22,0.6)" }}
         whileTap={{ scale: 0.95 }}
         style={{
           position: "fixed",
           bottom: "24px",
           right: "24px",
-          width: "58px",
-          height: "58px",
+          width: "64px",
+          height: "64px",
           borderRadius: "50%",
-          background: "linear-gradient(135deg, #f97316, #ea580c)",
-          border: "none",
+          background: "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
+          border: "1px solid rgba(255,255,255,0.1)",
           cursor: "pointer",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          fontSize: "24px",
-          boxShadow: "0 8px 32px rgba(249,115,22,0.45)",
+          fontSize: "26px",
+          boxShadow: "inset 0 2px 4px rgba(255,255,255,0.2), 0 8px 32px rgba(249,115,22,0.45)",
           zIndex: 1000,
           flexDirection: "column",
+          transition: "box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)",
         }}
       >
         {chatOpen ? "✕" : "💬"}
@@ -394,10 +398,10 @@ export function ChatWindow() {
         {chatOpen && (
           <motion.div
             id="chat-drawer"
-            initial={{ opacity: 0, y: 40, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 40, scale: 0.95 }}
-            transition={{ type: "spring", damping: 24, stiffness: 300 }}
+            initial={{ opacity: 0, y: 40, scale: 0.95, filter: "blur(10px)" }}
+            animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+            exit={{ opacity: 0, y: 40, scale: 0.95, filter: "blur(10px)" }}
+            transition={{ type: "spring", damping: 28, stiffness: 350 }}
             className="glass-strong"
             style={{
               position: "fixed",
@@ -416,11 +420,12 @@ export function ChatWindow() {
             <div
               style={{
                 padding: "16px 20px",
-                borderBottom: "1px solid var(--border)",
+                borderBottom: "1px solid rgba(255,255,255,0.05)",
                 display: "flex",
                 alignItems: "center",
-                gap: "12px",
+                gap: "14px",
                 flexShrink: 0,
+                background: "rgba(255,255,255,0.02)",
               }}
             >
               <div
@@ -522,7 +527,7 @@ export function ChatWindow() {
                 onKeyDown={handleKeyDown}
                 placeholder="Ask Zara... (try Hinglish!)"
                 disabled={isAIThinking}
-                style={{ flex: 1 }}
+                style={{ flex: 1, padding: "14px 18px" }}
               />
               <button
                 onClick={handleVoice}

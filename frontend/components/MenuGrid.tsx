@@ -77,7 +77,8 @@ function MenuItemCard({ item }: { item: MenuItem }) {
           style={{
             position: "absolute",
             inset: 0,
-            background: "linear-gradient(to top, rgba(10,10,10,0.8) 0%, transparent 50%)",
+            background: "linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.4) 40%, transparent 100%)",
+            pointerEvents: "none",
           }}
         />
         {/* Badges */}
@@ -110,14 +111,18 @@ function MenuItemCard({ item }: { item: MenuItem }) {
         <div
           style={{
             position: "absolute",
-            bottom: "10px",
-            right: "10px",
-            background: "rgba(0,0,0,0.7)",
+            bottom: "12px",
+            right: "12px",
+            background: "rgba(10,10,10,0.75)",
+            backdropFilter: "blur(8px)",
+            WebkitBackdropFilter: "blur(8px)",
             borderRadius: "8px",
-            padding: "3px 10px",
-            fontSize: "0.9rem",
-            fontWeight: 700,
-            color: "var(--accent-light)",
+            padding: "4px 10px",
+            fontSize: "0.85rem",
+            fontWeight: 800,
+            color: "var(--text-primary)",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)",
+            border: "1px solid rgba(255,255,255,0.05)",
           }}
         >
           ₹{item.price}
@@ -194,6 +199,7 @@ function MenuItemCard({ item }: { item: MenuItem }) {
           disabled={!item.available || adding}
           style={{
             width: "100%",
+            padding: "10px",
             opacity: !item.available ? 0.5 : 1,
             background: added
               ? "linear-gradient(135deg, #22c55e, #16a34a)"
@@ -203,7 +209,7 @@ function MenuItemCard({ item }: { item: MenuItem }) {
               : undefined,
           }}
         >
-          {added ? "✓ Added!" : adding ? "Adding..." : "Add to Cart"}
+          {added ? "✓ Added" : adding ? "..." : "Add to Cart"}
         </button>
       </div>
     </motion.div>
@@ -288,17 +294,17 @@ export function MenuGrid({ popularItems }: { popularItems?: MenuItem[] }) {
             key={cat}
             onClick={() => setActiveCategory(cat)}
             style={{
-              padding: "7px 16px",
+              padding: "8px 18px",
               borderRadius: "999px",
-              border: "none",
-              background: activeCategory === cat ? "var(--accent)" : "var(--bg-glass)",
-              color: activeCategory === cat ? "#fff" : "var(--text-secondary)",
+              border: activeCategory === cat ? "1px solid rgba(249,115,22,0.5)" : "1px solid var(--border)",
+              background: activeCategory === cat ? "var(--accent-dim)" : "var(--bg-glass)",
+              color: activeCategory === cat ? "var(--text-primary)" : "var(--text-secondary)",
               fontSize: "0.82rem",
-              fontWeight: activeCategory === cat ? 700 : 500,
+              fontWeight: activeCategory === cat ? 600 : 500,
               cursor: "pointer",
               whiteSpace: "nowrap",
-              transition: "all 0.2s ease",
-              boxShadow: activeCategory === cat ? "0 4px 16px rgba(249,115,22,0.3)" : "none",
+              transition: "all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)",
+              boxShadow: activeCategory === cat ? "inset 0 1px 0 rgba(255,255,255,0.1), 0 4px 16px rgba(249,115,22,0.1)" : "none",
             }}
           >
             {cat}
