@@ -181,16 +181,6 @@ If deploying to production for actual restaurants:
 3. **Payments Integration**: Replace the simulated OTP flow with a **Stripe / Razorpay** checkout session.
 4. **Voice Synthesizer**: Upgrade the browser speech-to-text to **OpenAI Whisper** and integrate **ElevenLabs** for conversational AI audio output.
 
----
-
-## 📸 Screenshots & Demo
-
-*(Add screenshots of the UI here)*
-- Dashboard & Menu
-- AI Chat Interaction
-- Cart & OTP Checkout Flow
-
-*(Embed a YouTube or Loom demo video here)*
 
 ---
 
