@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://via.placeholder.com/150x150.png?text=Spice+Garden" alt="Spice Garden Logo" width="120" height="120" />
+  
   <h1>Spice Garden — AI Smart Dining Assistant</h1>
   <p><strong>A production-grade, multi-agent conversational dining experience.</strong></p>
   <p>
