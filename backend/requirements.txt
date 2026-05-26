@@ -1,0 +1,10 @@
+groq
+fastapi
+uvicorn[standard]
+python-dotenv
+sentence-transformers
+numpy
+pydantic
+websockets
+httpx
+python-multipart

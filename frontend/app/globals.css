@@ -1,0 +1,364 @@
+@import "tailwindcss";
+
+:root {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #111111;
+  --bg-card: #161616;
+  --bg-glass: rgba(255, 255, 255, 0.04);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-glow: rgba(249, 115, 22, 0.3);
+  --text-primary: #f5f5f5;
+  --text-secondary: #a3a3a3;
+  --text-muted: #525252;
+  --accent: #f97316;
+  --accent-light: #fb923c;
+  --accent-dim: rgba(249, 115, 22, 0.15);
+  --green: #22c55e;
+  --green-dim: rgba(34, 197, 94, 0.15);
+  --red: #ef4444;
+  --font-inter: "Inter", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+}
+
+/* ── Glass card ── */
+.glass {
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.glass-strong {
+  background: rgba(22, 22, 22, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+/* ── Gradient text ── */
+.gradient-text {
+  background: linear-gradient(135deg, #f97316, #fb923c, #fbbf24);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Glow button ── */
+.btn-glow {
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 24px rgba(249, 115, 22, 0.35);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.btn-glow:hover::before {
+  opacity: 1;
+}
+
+.btn-glow:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 32px rgba(249, 115, 22, 0.5);
+}
+
+.btn-glow:active {
+  transform: translateY(0);
+}
+
+.btn-ghost {
+  background: var(--bg-glass);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-ghost:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.15);
+}
+
+/* ── Input ── */
+.input-dark {
+  background: var(--bg-glass);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: var(--font-inter);
+}
+
+.input-dark:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-dim);
+}
+
+.input-dark::placeholder {
+  color: var(--text-muted);
+}
+
+/* ── Chip / Tag ── */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid var(--border);
+  background: var(--bg-glass);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.chip:hover,
+.chip.active {
+  background: var(--accent-dim);
+  border-color: var(--border-glow);
+  color: var(--accent-light);
+}
+
+/* ── Chat bubble ── */
+.chat-bubble-ai {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px 18px 18px 18px;
+  padding: 14px 18px;
+  max-width: 85%;
+  line-height: 1.6;
+}
+
+.chat-bubble-user {
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  border-radius: 18px 4px 18px 18px;
+  padding: 14px 18px;
+  max-width: 75%;
+  margin-left: auto;
+  line-height: 1.6;
+}
+
+/* ── Agent status dot ── */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(249,115,22,0.4); }
+  50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(249,115,22,0); }
+}
+
+.agent-thinking {
+  animation: pulse-glow 1.2s ease-in-out infinite;
+  background: var(--accent);
+  border-radius: 50%;
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+}
+
+/* ── Typing indicator ── */
+@keyframes typing-dot {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.3; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+.typing-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: typing-dot 1.2s ease-in-out infinite;
+}
+
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+/* ── Skeleton loader ── */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-card) 25%,
+    rgba(255,255,255,0.04) 50%,
+    var(--bg-card) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+/* ── Toast animation ── */
+@keyframes slide-in-right {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.toast {
+  animation: slide-in-right 0.3s ease-out;
+}
+
+/* ── Bounce in ── */
+@keyframes bounce-in {
+  0% { transform: scale(0.8); opacity: 0; }
+  60% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.bounce-in {
+  animation: bounce-in 0.4s ease-out;
+}
+
+/* ── Cart badge ── */
+@keyframes cart-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+
+.cart-pop {
+  animation: cart-pop 0.3s ease-out;
+}
+
+/* ── Glow border on card hover ── */
+.menu-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  transition: all 0.25s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.menu-card:hover {
+  border-color: var(--border-glow);
+  box-shadow: 0 8px 32px rgba(249, 115, 22, 0.12);
+  transform: translateY(-2px);
+}
+
+/* ── Status badge ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.badge-orange {
+  background: var(--accent-dim);
+  color: var(--accent-light);
+  border: 1px solid var(--border-glow);
+}
+
+.badge-green {
+  background: var(--green-dim);
+  color: var(--green);
+  border: 1px solid rgba(34,197,94,0.2);
+}
+
+/* ── Group avatar ── */
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 2px solid var(--bg-primary);
+  flex-shrink: 0;
+}
+
+/* ── Fade in up ── */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in-up {
+  animation: fade-in-up 0.4s ease-out both;
+}
+
+/* ── Progress bar ── */
+@keyframes fill-bar {
+  from { width: 0%; }
+}
+
+.progress-bar {
+  height: 3px;
+  background: linear-gradient(90deg, #f97316, #fbbf24);
+  border-radius: 999px;
+  animation: fill-bar 0.6s ease-out both;
+}
+
+/* ── Mobile tweaks ── */
+@media (max-width: 640px) {
+  .chat-bubble-ai,
+  .chat-bubble-user {
+    max-width: 92%;
+  }
+}
